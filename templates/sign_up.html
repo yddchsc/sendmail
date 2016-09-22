@@ -1,0 +1,173 @@
+    <!DOCTYPE HTML>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="./static/favicon.ico" type="image/x-icon" />
+        <title>商家信息登记</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- Styles -->
+        <link href="./static/css/bootstrap.css" rel="stylesheet">
+        <link href="./static/css/style.css" rel="stylesheet">
+        <link rel='stylesheet' id='prettyphoto-css'  href="./static/css/prettyPhoto.css" type='text/css' media='all'>
+        <link href="./static/css/fontello.css" type="text/css" rel="stylesheet">
+        <script type="text/javascript" src="./static/js/jquery-1.8.3.min.js"></script>
+    <!--[if lt IE 7]>
+            <link href="./static/css/fontello-ie7.css" type="text/css" rel="stylesheet">  
+            <![endif]-->
+            <!-- Google Web fonts -->
+            <style>
+                body {
+                    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+                }
+            </style>
+            <link href="./static/css/bootstrap-responsive.css" rel="stylesheet">
+            <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+          <![endif]-->
+          <!-- Favicon -->
+
+          <!-- Load ScrollTo -->
+          <!-- prettyPhoto Initialization -->
+        
+        <script type="text/javascript">
+            function ajaxForm(){
+                if ($('input[name=your-name]').val()==""||$('input[name=your-phone]').val()==""||$('input[name=i_name]').val()==""||$('input[name=price]').val()==""||$('input[name=sort]').val()==""){
+                    alert("请确保填写的信息完整");
+                    return false;
+                }
+                var a = '';
+                var b0 = $("input[name='i_name']").toArray();
+                var b1 = $("input[name='price']").toArray();
+                var b2 = $("input[name='sort']").toArray();
+                for (var i = 0; i < b0.length;i++){
+                    a = a + "商品名称：" + b0[i].value + "<br>" + "商品种类："+ b1[i].value + "<br>" + "商品价格："+ b2[i].value + "<br>";
+                }
+                var data = {
+                    data: JSON.stringify({
+                        "your-name": $('input[name=your-name]').val(),
+                        "your-phone": $('input[name=your-phone]').val(),
+                        "description": $('textarea[name=description]').val(),
+                        "goods": a,
+                    })
+                };
+                $.ajax({
+                    type: 'post',
+                    url: "/",
+                    dataType: 'json',
+                    data:data,
+                });
+                alert("sign up successfully");
+                return true;
+            }
+            function getinf()
+            {
+                var f_your_name = document.getElementById("f_your_name").value;
+                var autoname=document.getElementsByClassName('your_name');
+                for(i=0, l = autoname.length; i < l; i++)
+                {
+                  autoname[i].value= f_your_name;
+              }
+
+              var f_contact = document.getElementById("f_contact").value;
+              var autocontact=document.getElementsByClassName('contact');
+              for(i=0, l = autocontact.length; i < l; i++)
+              {
+                  autocontact[i].value= f_contact;
+              }
+
+              var autoi_name=document.getElementsByClassName('i_name');
+              for(i=0, l = autoi_name.length; i < l; i++)
+              {
+                  autoi_name[i].value= "商品"+(i+2)+"名称";
+              }
+          }
+
+          function addTags()
+          {
+            var itemOriginal =document.getElementsByClassName("tagsInput");
+            var arr = new Array(itemOriginal.length);
+            for(var j = 0; j < itemOriginal.length;j++)
+            {
+                arr[j] = itemOriginal.item(j).value;
+            }
+
+            var str =
+            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+ "<input type='text' class='tagsInput your_name' name='your_name' placeholder='名字' id='f_your_name' class='cform-text' size='40' title='your name' style='display:none'/></br>"+
+            "<input type='text' class='tagsInput contact' name='contact'  placeholder='电话号码' id='f_contact' class='cform-text' size='40' title='your contact'style='display:none'/></br>"+
+            "<input type='text' class='tagsInput' name='i_name'  placeholder='商品名称' class='cform-text' size='40' title='company' /><br />"+
+            "<input type='text' class='tagsInput' name='sort'  placeholder='类别' class='cform-text' size='40' title='website' /><br />"+
+            "<input type='text' class='tagsInput' name='price'   placeholder='价格' class='cform-text' size='40' title='price'/><br /><br />";
+            document.getElementById("tags").innerHTML += str;
+            var itemNew =document.getElementsByClassName("tagsInput");
+            for(var i=0;i<arr.length;i++)
+            {
+                itemNew.item(i).value = arr[i];
+            }
+        }
+    </script>
+</head>
+<body>
+  <!--******************** NAVBAR ********************-->
+  <div class="navbar-wrapper">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <!-- 顶部蓝色的条 -->
+        </div>
+        <!-- /.navbar-inner -->
+    </div>
+    <!-- /.navbar -->
+</div>
+<!-- /.navbar-wrapper -->
+
+<!--******************** sign up Section ********************-->
+<section id="contact" class="single-page scrollblock">
+    <div class="container">
+      <div class="align"><img src="./static/img/pencil.png" alt=""></div>
+      <h1>Sign up</h1>
+      <div class="row">
+        <div class="span12">
+          <div class="cform" id="theme-form">
+              <form class="cform-form">
+                  <div class="row">
+                    <div class="span6"> <span class="your-name">
+                      <input type="text" name="your-name" placeholder="名字" id="f_your_name" class="cform-text" size="40" title="your name">
+                  </span> </div>
+                  <div class="span6"> <span class="your-phone">
+                      <input type="text" name="your-phone" placeholder="电话号码" id="f_contact" class="cform-text" size="40" title="your phone">
+                  </span> </div>
+              </div>
+              <div class="row">
+                <div class="span6"> <span class="company">
+                  <input type="text" name="i_name" placeholder="商品名称" class="cform-text" size="40" title="company">
+              </span> </div>
+              <div class="span6"> <span class="website">
+                  <input type="text" name="price" placeholder="价格" class="cform-text" size="40" title="website">
+              </span> </div>
+              <div class="span6"> <span class="website">
+                  <input type="text" name="sort" placeholder="类别" class="cform-text" size="40" title="website">
+              </span> </div>
+          </div>
+          <div id="tags"></div>
+          <div class="row">
+            <div class="span12"> <span class="message">
+              <textarea name="description" placeholder="更多描述" class="cform-textarea" cols="40" rows="10" title="drop us a line."></textarea>
+          </span> </div>
+      </div>
+      <div>
+       <input type="button" value="添加更多商品" name="addTag"  class="cform-submit pull-left" onclick="addTags();getinf()">
+       <input type="button" value="提交" onclick="ajaxForm();" class="cform-submit pull-left">
+   </div>
+   <div class="cform-response-output"></div>
+</form>
+</div>
+</div>
+<!-- ./span12 -->
+</div>
+<!-- /.row -->
+</div>
+</section>
+</body>
+</html>
